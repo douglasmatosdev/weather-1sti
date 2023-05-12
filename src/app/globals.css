@@ -5,6 +5,7 @@
 :root {
   --bg: #FF8200;
   --bg-foreground: #f4ac53;
+  --color-card-text: #515151;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +18,8 @@
 body {
   background: var(--bg);
 }
-* {
+*,html,body {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
