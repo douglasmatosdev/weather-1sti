@@ -4,21 +4,30 @@ import { InputText } from "@/components/InputText";
 import { RandomList } from '@/components/RandomList';
 import { mockData } from '@/utils';
 import { CardWeather } from '@/components/CardWeather';
+import { useStatesByCode } from '@/hooks/useStatesByCode';
+import api from '@/services/api';
 
 export default function Home() {
+  const [data, setData] = React.useState<ResponseConsult | null>(null)
   const [displayCard, setDisplayCard] = React.useState(false)
 
   const handleSearch = (term: string): void => {
     if (term) {
       setDisplayCard(!displayCard)
-      console.log(term);
+      getCityByName(term)
     }
   }
+  const getCityByName = (name: string): void => {
+    const response = api.getByName(name)
+      .then(res => res.cod == '200' && setData(res))
+  }
+
+  
 
   return (
     <main className="w-full flex flex-col mx-auto p-0 m-0">
       <div className="w-full max-w-screen-sm mx-auto flex flex-col items-center md:px-6 py-8 justify-center border-b border-[#FFE7C7]">
-        <h1 className="inline-block text-white text-2xl ml-6 md:ml-0 md:mb-4 md:text-6xl whitespace-wrap font-bold leading-[64px]">
+        <h1 className={`inline-block text-white ml-6 md:ml-0 md:mb-4 whitespace-wrap text-${displayCard ? 2 : 6}xl sm:text-6xl whitespace-wrap font-bold leading-[64px]`}>
           Previsão do tempo
         </h1>
 
@@ -40,6 +49,14 @@ export default function Home() {
           Capitais
         </h1>
         <RandomList data={mockData} />
+      </div>
+
+      <div>
+        <pre>
+          {
+            data && JSON.stringify(data, null, 2)
+          }
+        </pre>
       </div>
     </main>
   );

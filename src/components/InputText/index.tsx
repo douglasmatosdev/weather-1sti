@@ -38,7 +38,7 @@ export const InputText = ({
       />
       <button
         type="button"
-        className="absolute top-0 right-0 bg-white py-3 px-4 flex justify-center items-center"
+        className="absolute h-10 top-1 right-1 bg-white py-3 px-4 flex justify-center items-center"
         onClick={() => handler(search)}
       >
         <ImSearch className="text-[1.5rem]" />
