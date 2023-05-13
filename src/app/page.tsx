@@ -4,7 +4,6 @@ import { InputText } from "@/components/InputText";
 import { RandomList } from '@/components/RandomList';
 import { mockData } from '@/utils';
 import { CardWeather } from '@/components/CardWeather';
-import { useStatesByCode } from '@/hooks/useStatesByCode';
 import api from '@/services/api';
 
 export default function Home() {
