@@ -80,3 +80,4 @@ export const mockData = [
     },
 ];
 
+export * from './getInitialLetters'

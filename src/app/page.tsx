@@ -5,6 +5,7 @@ import { RandomList } from '@/components/RandomList';
 import { mockData } from '@/utils';
 import { CardWeather } from '@/components/CardWeather';
 import api from '@/services/api';
+import { mountCardValues } from '@/utils/mountCardValues';
 
 export default function Home() {
   const [data, setData] = React.useState<ResponseConsult | null>(null)
@@ -12,7 +13,7 @@ export default function Home() {
 
   const handleSearch = (term: string): void => {
     if (term) {
-      setDisplayCard(!displayCard)
+      setDisplayCard(true)
       getCityByName(term)
     }
   }
@@ -20,8 +21,6 @@ export default function Home() {
     const response = api.getByName(name)
       .then(res => res.cod == '200' && setData(res))
   }
-
-  
 
   return (
     <main className="w-full flex flex-col mx-auto p-0 m-0">
@@ -31,7 +30,7 @@ export default function Home() {
         </h1>
 
         {
-          displayCard ? <CardWeather handler={setDisplayCard} /> : null
+          displayCard && data? <CardWeather handler={setDisplayCard} data={mountCardValues(data)} /> : null
         }
         <div className="sm:w-full w-[90%] max-w-xl mt-4 md:mt-12flex justify-center">
           <InputText
@@ -49,14 +48,51 @@ export default function Home() {
         </h1>
         <RandomList data={mockData} />
       </div>
-
-      <div>
-        <pre>
-          {
-            data && JSON.stringify(data, null, 2)
-          }
-        </pre>
-      </div>
     </main>
   );
+}
+
+
+const d = {
+  "coord": {
+    "lon": -43.3117,
+    "lat": -22.7856
+  },
+  "weather": [
+    {
+      "id": 802,
+      "main": "Clouds",
+      "description": "nuvens dispersas",
+      "icon": "03n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 22.23,
+    "feels_like": 22.47,
+    "temp_min": 21.94,
+    "temp_max": 23.26,
+    "pressure": 1019,
+    "humidity": 75
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 5.14,
+    "deg": 150
+  },
+  "clouds": {
+    "all": 40
+  },
+  "dt": 1684103068,
+  "sys": {
+    "type": 1,
+    "id": 8376,
+    "country": "BR",
+    "sunrise": 1684055898,
+    "sunset": 1684095661
+  },
+  "timezone": -10800,
+  "id": 3464374,
+  "name": "Duque de Caxias",
+  "cod": 200
 }

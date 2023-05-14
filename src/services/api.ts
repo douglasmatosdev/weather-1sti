@@ -2,9 +2,13 @@
 // const API_KEY = 'a66d13253dc39685dfaabd202f467c33'//process.env.NEXT_PUBLIC_TOKEN
 // const AUTH = `appid=${API_KEY}`
 const BR_SETUP = 'units=metric&lang=pt_br'
-const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid='
+//http://api.openweathermap.org/data/2.5/weather?q=duque%20de%20caxias&appid=a66d13253dc39685dfaabd202f467c33&units=metric
+const BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?q='
+// const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid='
+
 const API_KEY = 'db04f7f0492b01563ff78567693c5b79'
-const AUTH = `appid=${API_KEY}`
+const AUTH = `&appid=${API_KEY}&${BR_SETUP}`
+
 
 const url = {
     byId: `${BASE_URL}weather?id=`,
@@ -23,7 +27,7 @@ const api = {
             .then(res => res && res.json())
     },
     getByName: (name: string): Promise<ResponseConsult> => {
-        return fetch(`${url.byName}${name}&${AUTH}&${BR_SETUP}`)
+        return fetch(`${BASE_URL}${name}${AUTH}`)
             .then(res => res && res.json())
     },
     getForecastByName: (name: string): Promise<ResponseConsultForecast> => {

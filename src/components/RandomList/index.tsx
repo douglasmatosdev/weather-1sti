@@ -1,7 +1,12 @@
 import React from 'react'
 
+type WeatherMock = {
+    city: string
+    min: number
+    max: number
+}
 interface RandomListProps {
-    data: Weather[]
+    data: WeatherMock[]
 }
 
 export const RandomList = ({ data }: RandomListProps) => {

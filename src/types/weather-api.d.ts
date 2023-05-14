@@ -10,7 +10,7 @@ declare type ResponseConsult = {
     sys: Sys
     timezone: number
     visibility: number
-    weather: Weather
+    weather: Weather[]
     wind: Wind
 }
 
@@ -46,7 +46,7 @@ declare type Weather = {
     icon: string
     id: number
     main: string
-}[]
+}
 
 declare type Wind = {
     deg: number
@@ -79,7 +79,7 @@ declare type ListForecast = {
     name: string
     sys: { prod: number }
     visibility: number
-    weather: Weather
+    weather: Weather[]
     wind: Wind & { gust: number }
 }
 
@@ -90,3 +90,4 @@ declare type ResponseConsultForecast = {
     list: ListForecast[]
     massage: 0
 }
+
