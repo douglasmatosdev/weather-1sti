@@ -30,7 +30,7 @@ export const CardWeather = ({ handler, data }: CardWeatherProps) => {
                 </div>
                 <span className='text-[var(--color-card-text)] inline-block'>Sensação <strong>{feels_like}°</strong></span>
                 <span className='text-[var(--color-card-text)] inline-block'>Vento <strong>{wind}Km/h</strong></span>
-                <span className='text-[var(--color-card-text)] inline-block'>Humiade <strong>{humidity}%</strong></span>
+                <span className='text-[var(--color-card-text)] inline-block'>Humidade <strong>{humidity}%</strong></span>
             </div>
 
             <div className='pt-4'>
