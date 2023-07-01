@@ -18,7 +18,7 @@ export default function Home() {
     }
   }
   const getCityByName = (name: string): void => {
-    const response = api.getByName(name)
+    api.getByName(name)
       .then(res => res.cod == '200' && setData(res))
   }
 
@@ -52,49 +52,4 @@ export default function Home() {
       </div>
     </main>
   );
-}
-
-
-const d = {
-  "coord": {
-    "lon": -43.3117,
-    "lat": -22.7856
-  },
-  "weather": [
-    {
-      "id": 802,
-      "main": "Clouds",
-      "description": "nuvens dispersas",
-      "icon": "03n"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 22.23,
-    "feels_like": 22.47,
-    "temp_min": 21.94,
-    "temp_max": 23.26,
-    "pressure": 1019,
-    "humidity": 75
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 5.14,
-    "deg": 150
-  },
-  "clouds": {
-    "all": 40
-  },
-  "dt": 1684103068,
-  "sys": {
-    "type": 1,
-    "id": 8376,
-    "country": "BR",
-    "sunrise": 1684055898,
-    "sunset": 1684095661
-  },
-  "timezone": -10800,
-  "id": 3464374,
-  "name": "Duque de Caxias",
-  "cod": 200
 }
