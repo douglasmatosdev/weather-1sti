@@ -11,10 +11,16 @@ export default function Home() {
   const [data, setData] = React.useState<ResponseConsult | null>(null)
   const [displayCard, setDisplayCard] = React.useState(false)
 
-  const handleSearch = (term: string): void => {
+  const handleCloseOrOpenCard = (openOrClose: boolean): void => {
+    setDisplayCard(openOrClose)
+  }
+
+  const handleOnSearch = (term: string): void => {
     if (term) {
       setDisplayCard(true)
       getCityByName(term)
+    } else {
+
     }
   }
   const getCityByName = (name: string): void => {
@@ -32,14 +38,14 @@ export default function Home() {
         </div>
 
         {
-          displayCard && data ? <CardWeather handler={setDisplayCard} data={mountCardValues(data)} /> : null
+          displayCard && data ? <CardWeather handler={handleCloseOrOpenCard} data={mountCardValues(data)} /> : null
         }
         <div className="sm:w-full w-[90%] max-w-xl mt-4 md:mt-12flex justify-center">
           <InputText
             className="inline-block w-full"
             placeholder="Insira aqui o nome da cidade "
             name={"input-search"}
-            handler={handleSearch}
+            handleOnSearch={handleOnSearch}
           />
         </div>
       </div>

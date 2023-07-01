@@ -5,20 +5,36 @@ interface InputTextProps {
   placeholder?: string;
   className?: string;
   name?: string;
-  handler: (term: string) => void
+  handleOnSearch: (term: string) => void
 }
 
 export const InputText = ({
   className,
   placeholder,
   name = "input-text",
-  handler
+  handleOnSearch
+  
 }: InputTextProps) => {
   const [search, setSearch] = React.useState<string>('')
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     setSearch(value)
+  }
+
+  const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (search) {
+      handleOnSearch(search)
+      setSearch('')
+    }
+  }
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.code === 'Enter' && search) {
+      handleOnSearch(search)
+      setSearch('')
+
+    }
   }
 
   return (
@@ -29,17 +45,13 @@ export const InputText = ({
         type="text"
         placeholder={placeholder}
         value={search}
-        onChange={handleInputChange}
-        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-          if (event.code === 'Enter') {
-            handler(search)
-          }
-        }}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
       />
       <button
         type="button"
         className="absolute h-10 top-1 right-1 bg-white py-3 px-4 flex justify-center items-center"
-        onClick={() => handler(search)}
+        onClick={onClick}
       >
         <ImSearch className="text-[1.5rem]" />
       </button>
