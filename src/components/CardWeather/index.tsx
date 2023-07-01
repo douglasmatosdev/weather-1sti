@@ -1,8 +1,8 @@
 import React from 'react'
 import { WeekForecast } from '../WeekForecast'
-import { getInitialLetters, mockWeekForecast } from '@/utils'
+import { getInitialLetters } from '@/utils/getInitialLetters'
 import { FaTimes } from 'react-icons/fa'
-
+import { mockWeekForecast } from '@/__mocks__/mockWeekForecast'
 interface CardWeatherProps {
     handler: (value: boolean) => void
     data: CardValues
