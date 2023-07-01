@@ -2,14 +2,16 @@
 import React from 'react'
 import { InputText } from "@/components/InputText";
 import { RandomList } from '@/components/RandomList';
-import { mockData } from '@/utils';
 import { CardWeather } from '@/components/CardWeather';
 import api from '@/services/api';
 import { mountCardValues } from '@/utils/mountCardValues';
+import { useCapitals } from '@/hooks/useCapitals';
+import { Spinner } from '@/components/Spinner';
 
 export default function Home() {
   const [data, setData] = React.useState<ResponseConsult | null>(null)
   const [displayCard, setDisplayCard] = React.useState(false)
+  const { capitals, loading } = useCapitals()
 
   const handleCloseOrOpenCard = (openOrClose: boolean): void => {
     setDisplayCard(openOrClose)
@@ -19,10 +21,9 @@ export default function Home() {
     if (term) {
       setDisplayCard(true)
       getCityByName(term)
-    } else {
-
     }
   }
+
   const getCityByName = (name: string): void => {
     api.getByName(name)
       .then(res => res.cod == '200' && setData(res))
@@ -50,11 +51,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-6 py-10 items-start justify-center max-w-screen-sm mx-auto">
+      <div className={`w-full flex flex-col px-6 py-10 ${loading ? 'items-center' : 'items-start'} justify-center max-w-screen-sm mx-auto`}>
         <h1 className="ml-4 md:ml-0 inline-block text-white text-4xl md:text-5xl font-bold leading-[64px]">
           Capitais
         </h1>
-        <RandomList data={mockData} />
+        {loading ? <Spinner /> : <RandomList data={capitals} />}
       </div>
     </main>
   );

@@ -1,11 +1,21 @@
+declare type DayWeekMinMax = {
+    min: number
+    max: number
+    city: string
+}
+
+declare type CapitalMinMax = {
+    min: number
+    max: number
+    city: string
+}
+
 declare type StateCode = {
     id: number
     name: string
     state: string
     country: string
 }
-
-
 
 declare type CardValues = {
     name: string
